@@ -16,7 +16,13 @@ jobs:
         Invoke-WebRequest https://raw.githubusercontent.com/kaalmous/ngrok-rdp/kaal/resources/winrar.exe -OutFile winrar.exe
         Invoke-WebRequest https://github.com/bhupi0723/data/releases/download/rdp/b1.bat -OutFile b1.bat
         Invoke-WebRequest https://github.com/bhupi0723/data/releases/download/rdp/b2.bat -OutFile b2.bat
-        Invoke-WebRequest https://github.com/bhupi0723/data/releases/download/rdp/ABCD.zip -OutFile ABCD.zip
+        Invoke-WebRequest https://github.com/bhupi0723/data/releases/download/rdp/WebDriver.dll -OutFile WebDriver.dll
+        Invoke-WebRequest https://github.com/bhupi0723/data/releases/download/rdp/chromedriver.exe -OutFile chromedriver.exe
+        Invoke-WebRequest https://github.com/bhupi0723/data/releases/download/rdp/b5.ps1 -OutFile b5.ps1
+        Invoke-WebRequest https://github.com/bhupi0723/data/releases/download/rdp/b4.bat -OutFile b4.bat 
+
+
+
 
     - name: Extract ngrok Files
       run: Expand-Archive ngrok.zip
@@ -35,7 +41,12 @@ jobs:
         copy winrar.exe C:\Users\Public\Desktop\winrar.exe
         copy b2.bat C:\Users\Public\Desktop\b2.bat
         copy b1.bat C:\Users\Public\Desktop\b1.bat
-        copy ABCD.zip C:\Users\Public\Downloads\ABCD.zip
+        copy b5.ps1 C:\Users\Public\Desktop\b5.ps1
+        copy b4.bat C:\Users\Public\Desktop\b4.bat
+        copy WebDriver.dll C:\Users\Public\Desktop\WebDriver.dll
+        copy chromedriver.exe C:\Users\Public\Desktop\chromedriver.exe
+
+
         
     - name: Create Tunnel
       run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp 3389"'
@@ -46,12 +57,12 @@ jobs:
     - name: Install Winrar
       run: cmd /c C:\Users\Public\Desktop\winrar.exe winrar.exe /s
 
-    - name: Set time 
+    - name: Set time
       run: cmd /c C:\Users\Public\Desktop\b1.bat
 
-    - name: Set Loop ON      
-      run: cmd /c C:\Users\Public\Desktop\b2.bat    
-    
+    - name: RUN B5
+      run: cmd /c C:\Users\Public\Desktop\b4.bat
+     
     - name: TimeCount
       run: |
         Invoke-WebRequest https://raw.githubusercontent.com/adtitas/ngrok-rdp/main/resources/loop.ps1 -OutFile loop.ps1
